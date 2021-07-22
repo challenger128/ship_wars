@@ -37,7 +37,10 @@ def keydown_events(screen, game_setting, event, ship, bullets):
 def check_events(screen, game_setting, ship, bullets):
     """
     Function which processes events
-    :param ship: requires for ship movement
+    :param screen: requires for keydown_events call
+    :param game_setting: requires for keydown_events call
+    :param ship: control movement of ship
+    :param bullets: create bullets in keydown_events call
     :return: None
     """
     for event in pygame.event.get():  # User did something
@@ -51,9 +54,10 @@ def check_events(screen, game_setting, ship, bullets):
 def update_screen(screen, game_setting, ship, bullets):
     """
     Function which handles screen updates
-    :param game_setting: contains important attributes
     :param screen: just our pygame screen
+    :param game_setting: contains important attributes
     :param ship: our object which will be drawn
+    :param bullets: our group of bullet which we will draw
     :return: None
     """
     screen.fill(game_setting.bg_color)
