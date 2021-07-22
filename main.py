@@ -1,4 +1,5 @@
 import pygame
+from pygame.sprite import Group
 from settings import Setting
 from ship import Ship
 from manipulation import check_events, update_screen
@@ -11,10 +12,13 @@ screen = pygame.display.set_mode([game_setting.screen_width,
 pygame.display.set_caption(game_setting.name)
 clock = pygame.time.Clock()
 ship = Ship(screen, game_setting)
+bullets = Group()
+
 
 while True:
     # Set the framerate
     clock.tick(game_setting.fps)
-    check_events(ship)
+    check_events(screen, game_setting, ship, bullets)
     ship.update()
-    update_screen(game_setting, screen, ship)
+    bullets.update()
+    update_screen(screen, game_setting, ship, bullets)
