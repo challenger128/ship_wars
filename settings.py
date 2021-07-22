@@ -8,5 +8,8 @@ class Setting:
         """
         self.screen_width = 1270
         self.screen_height = 720
-        self.bg_color = (230, 230, 230)
+        self.bg_color = (225, 229, 234)
+        self.fps = 120
+        self.name = 'Alien Invasion'
+
 
