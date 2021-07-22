@@ -26,7 +26,7 @@ while running:
     # Clear the screen and set the screen background
     screen.fill(game_setting.bg_color)
     ship = Ship(screen)
-    ship.blit_ship()
+    ship.blit()
 
     # Go ahead and update the screen with what we've drawn.
     # This MUST happen after all the other drawing commands.
