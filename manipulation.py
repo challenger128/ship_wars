@@ -31,8 +31,9 @@ def keydown_events(screen, game_setting, event, ship, bullets):
         if event.key == pygame.K_LEFT:
             ship.moving_left = True
         if event.key == pygame.K_SPACE:
-            new_bullet = Bullet(screen, game_setting, ship)
-            bullets.add(new_bullet)
+            if len(bullets) < game_setting.bullet_allowed:
+                new_bullet = Bullet(screen, game_setting, ship)
+                bullets.add(new_bullet)
 
 def check_events(screen, game_setting, ship, bullets):
     """
