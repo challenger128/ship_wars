@@ -12,7 +12,7 @@ class Setting:
         self.fps = 120
         self.name = 'Alien Invasion'
         self.ship_speed = 2
-        self.bullet_speed = 2
+        self.bullet_speed = 4
         self.bullet_width = 4
         self.bullet_height = 12
         self.bullet_color = (89, 82, 96)
