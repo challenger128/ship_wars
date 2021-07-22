@@ -1,6 +1,6 @@
 import sys
 import pygame
-
+from bullet import Bullet
 
 def keyup_events(event, ship):
     """
@@ -17,7 +17,7 @@ def keyup_events(event, ship):
             ship.moving_left = False
 
 
-def keydown_events(event, ship):
+def keydown_events(screen, game_setting, event, ship, bullets):
     """
     Takes an event and check if it is an keydown-event.
     If it is the keyup-event, ship movement will be started
@@ -30,9 +30,11 @@ def keydown_events(event, ship):
             ship.moving_right = True
         if event.key == pygame.K_LEFT:
             ship.moving_left = True
+        if event.key == pygame.K_SPACE:
+            new_bullet = Bullet(screen, game_setting, ship)
+            bullets.add(new_bullet)
 
-
-def check_events(ship):
+def check_events(screen, game_setting, ship, bullets):
     """
     Function which processes events
     :param ship: requires for ship movement
@@ -44,9 +46,9 @@ def check_events(ship):
             sys.exit()
         else:
             keyup_events(event, ship)
-            keydown_events(event, ship)
+            keydown_events(screen, game_setting, event, ship, bullets)
 
-def update_screen(game_setting, screen, ship):
+def update_screen(screen, game_setting, ship, bullets):
     """
     Function which handles screen updates
     :param game_setting: contains important attributes
@@ -56,4 +58,6 @@ def update_screen(game_setting, screen, ship):
     """
     screen.fill(game_setting.bg_color)
     ship.blit()
+    for bullet in bullets:
+        bullet.draw()
     pygame.display.flip()
