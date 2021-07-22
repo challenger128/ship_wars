@@ -10,8 +10,8 @@ class Setting:
         self.screen_height = 720
         self.bg_color = (225, 229, 234)
         self.fps = 120
-        self.name = 'Alien Invasion'
-        self.ship_speed = 2
+        self.name = 'Ship Wars. Prototype'
+        self.ship_speed = 3
         self.bullet_speed = 4
         self.bullet_width = 4
         self.bullet_height = 12
