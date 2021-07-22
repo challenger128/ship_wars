@@ -11,5 +11,4 @@ class Setting:
         self.bg_color = (225, 229, 234)
         self.fps = 120
         self.name = 'Alien Invasion'
-
-
+        self.ship_speed = 2
