@@ -2,6 +2,36 @@ import sys
 import pygame
 
 
+def keyup_events(event, ship):
+    """
+    Takes an event and check if it is an keyup-event.
+    If it is the keyup-event, ship movement will be stopped
+    :param event: Takes an event from queue
+    :param ship: Takes our ship
+    :return: None
+    """
+    if event.type == pygame.KEYUP:
+        if event.key == pygame.K_RIGHT:
+            ship.moving_right = False
+        if event.key == pygame.K_LEFT:
+            ship.moving_left = False
+
+
+def keydown_events(event, ship):
+    """
+    Takes an event and check if it is an keydown-event.
+    If it is the keyup-event, ship movement will be started
+    :param event: Takes an event from queue
+    :param ship: Takes our ship
+    :return: None
+    """
+    if event.type == pygame.KEYDOWN:
+        if event.key == pygame.K_RIGHT:
+            ship.moving_right = True
+        if event.key == pygame.K_LEFT:
+            ship.moving_left = True
+
+
 def check_events(ship):
     """
     Function which processes events
@@ -12,17 +42,9 @@ def check_events(ship):
         if event.type == pygame.QUIT:  # If user clicked close
             pygame.quit()
             sys.exit()
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_RIGHT:
-                ship.moving_right = True
-            if event.key == pygame.K_LEFT:
-                ship.moving_left = True
-        elif event.type == pygame.KEYUP:
-            if event.key == pygame.K_RIGHT:
-                ship.moving_right = False
-            if event.key == pygame.K_LEFT:
-                ship.moving_left = False
-
+        else:
+            keyup_events(event, ship)
+            keydown_events(event, ship)
 
 def update_screen(game_setting, screen, ship):
     """
