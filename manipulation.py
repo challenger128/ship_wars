@@ -64,4 +64,7 @@ def update_screen(screen, game_setting, ship, bullets):
     ship.blit()
     for bullet in bullets:
         bullet.draw()
+    for bullet in bullets.copy():
+        if bullet.rect.bottom <= 0:
+            bullets.remove(bullet)
     pygame.display.flip()
