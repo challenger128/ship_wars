@@ -21,9 +21,13 @@ class Ship:
         self.game_setting = game_setting
 
     def update(self):
+        """
+        Update ship position
+        :return: None
+        """
         if self.moving_right and self.rect.right < self.screen_rect.right:
             self.rect.centerx += self.game_setting.ship_speed
-        if self.moving_left and self.rect.left > self.s:
+        if self.moving_left and self.rect.left > self.screen_rect.left:
             self.rect.centerx -= self.game_setting.ship_speed
 
     def blit(self):
