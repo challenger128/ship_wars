@@ -51,7 +51,7 @@ def check_events(screen, game_setting, ship, bullets):
             keyup_events(event, ship)
             keydown_events(screen, game_setting, event, ship, bullets)
 
-def update_screen(screen, game_setting, ship, bullets):
+def update_screen(screen, game_setting, ship, bullets, current_fps):
     """
     Function which handles screen updates
     :param screen: just our pygame screen
@@ -62,6 +62,7 @@ def update_screen(screen, game_setting, ship, bullets):
     """
     screen.fill(game_setting.bg_color)
     ship.blit()
+    current_fps.output()
     for bullet in bullets:
         bullet.draw()
     for bullet in bullets.copy():
