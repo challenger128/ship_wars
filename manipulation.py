@@ -97,7 +97,6 @@ def update_screen(screen, background, game_setting, ship, bullets):
     :param bullets: our group of bullet which we will draw
     :return: None
     """
-    #screen.fill(game_setting.bg_color)
     screen.blit(background, (0, 0))
     ship.blit()
     for bullet in bullets:
