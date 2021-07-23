@@ -3,7 +3,9 @@ from pygame.sprite import Sprite
 
 
 class Bullet(Sprite):
-
+    """
+    Class for working with our bullets
+    """
     def __init__(self, screen, game_setting, ship):
         """
         Init bullet which inherited by Sprite.
