@@ -2,6 +2,38 @@ import sys
 import pygame
 from bullet import Bullet
 
+
+def create_ship_bullet(screen, game_setting, ship, bullets):
+    """
+    Function which creates new bullet in Group of Sprites
+    :param screen: required for Bullet constructor
+    :param game_setting: required for Bullet constructor, its attribute
+    limits amount of bullets
+    :param ship: required for Bullet constructor
+    :param bullets: required for Bullet constructor
+    :return: None
+    """
+    if len(bullets) < game_setting.bullet_allowed:
+        new_bullet = Bullet(screen, game_setting, ship)
+        bullets.add(new_bullet)
+
+
+def mousedown_events(screen, game_setting, event, ship, bullets):
+    """
+    Takes an event and check if it is an mouse-button-down event.
+    If it is the mouse-button-down, ship will fire
+    :param screen: required for creating bullet
+    :param game_setting: required for creating bullet
+    :param event: event object which we will check
+    :param ship: required for creating bullet
+    :param bullets: required for creating bullet
+    :return: None
+    """
+    if event.type == pygame.MOUSEBUTTONDOWN:
+        if event.button == 1:
+            create_ship_bullet(screen, game_setting, ship, bullets)
+
+
 def keyup_events(event, ship):
     """
     Takes an event and check if it is an keyup-event.
@@ -11,29 +43,31 @@ def keyup_events(event, ship):
     :return: None
     """
     if event.type == pygame.KEYUP:
-        if event.key == pygame.K_RIGHT:
+        if event.key == pygame.K_RIGHT or event.key == pygame.K_d:
             ship.moving_right = False
-        if event.key == pygame.K_LEFT:
+        if event.key == pygame.K_LEFT or event.key == pygame.K_a:
             ship.moving_left = False
 
 
 def keydown_events(screen, game_setting, event, ship, bullets):
     """
     Takes an event and check if it is an keydown-event.
-    If it is the keyup-event, ship movement will be started
-    :param event: Takes an event from queue
-    :param ship: Takes our ship
+    If it is the keydown-event, ship movement will start moving or shooting
+    :param screen: required for creating bullet
+    :param game_setting: required for creating bullet
+    :param event: event object which we will check
+    :param ship: required for creating bullet, changes attribute which respond for moving
+    :param bullets: required for creating bullet
     :return: None
     """
     if event.type == pygame.KEYDOWN:
-        if event.key == pygame.K_RIGHT:
+        if event.key == pygame.K_RIGHT or event.key == pygame.K_d:
             ship.moving_right = True
-        if event.key == pygame.K_LEFT:
+        if event.key == pygame.K_LEFT or event.key == pygame.K_a:
             ship.moving_left = True
         if event.key == pygame.K_SPACE:
-            if len(bullets) < game_setting.bullet_allowed:
-                new_bullet = Bullet(screen, game_setting, ship)
-                bullets.add(new_bullet)
+            create_ship_bullet(screen, game_setting, ship, bullets)
+
 
 def check_events(screen, game_setting, ship, bullets):
     """
@@ -51,8 +85,10 @@ def check_events(screen, game_setting, ship, bullets):
         else:
             keyup_events(event, ship)
             keydown_events(screen, game_setting, event, ship, bullets)
+            mousedown_events(screen, game_setting, event, ship, bullets)
 
-def update_screen(screen, game_setting, ship, bullets, bullets_have):
+
+def update_screen(screen, game_setting, ship, bullets):
     """
     Function which handles screen updates
     :param screen: just our pygame screen
@@ -63,7 +99,6 @@ def update_screen(screen, game_setting, ship, bullets, bullets_have):
     """
     screen.fill(game_setting.bg_color)
     ship.blit()
-    bullets_have.output()
     for bullet in bullets:
         bullet.blit()
     for bullet in bullets.copy():
