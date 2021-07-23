@@ -18,7 +18,6 @@ class Bullet(Sprite):
         self.rect = self.image.get_rect()
         self.rect.centerx = ship.rect.centerx
         self.rect.top = ship.rect.top
-        self.color = game_setting.bullet_color
         self.speed = game_setting.bullet_speed
 
     def update(self):
