@@ -9,8 +9,8 @@ game_setting = Setting()
 screen = pygame.display.set_mode([game_setting.screen_width,
                                  game_setting.screen_height])
 pygame.display.set_caption(game_setting.name)
-pygame.display.set_icon(pygame.image.load('ship_wars/assets/ship.png'))
 clock = pygame.time.Clock()
+background = pygame.image.load('ship_wars/assets/bg.png').convert_alpha()
 ship = Ship(screen, game_setting)
 bullets = Group()
 
@@ -19,4 +19,4 @@ while True:
     check_events(screen, game_setting, ship, bullets)
     ship.update()
     bullets.update()
-    update_screen(screen, game_setting, ship, bullets)
+    update_screen(screen, background, game_setting, ship, bullets)

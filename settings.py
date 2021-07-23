@@ -8,7 +8,6 @@ class Setting:
         """
         self.screen_width = 1280
         self.screen_height = 720
-        self.bg_color = (23, 16, 16)
         self.fps = 120
         self.name = 'Ship Wars. Prototype'
         self.ship_speed = 3

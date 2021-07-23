@@ -88,7 +88,7 @@ def check_events(screen, game_setting, ship, bullets):
             mousedown_events(screen, game_setting, event, ship, bullets)
 
 
-def update_screen(screen, game_setting, ship, bullets):
+def update_screen(screen, background, game_setting, ship, bullets):
     """
     Function which handles screen updates
     :param screen: just our pygame screen
@@ -97,7 +97,8 @@ def update_screen(screen, game_setting, ship, bullets):
     :param bullets: our group of bullet which we will draw
     :return: None
     """
-    screen.fill(game_setting.bg_color)
+    #screen.fill(game_setting.bg_color)
+    screen.blit(background, (0, 0))
     ship.blit()
     for bullet in bullets:
         bullet.blit()
