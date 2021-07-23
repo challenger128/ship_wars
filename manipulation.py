@@ -1,7 +1,26 @@
 import sys
 import pygame
+from random import shuffle
 from bullet import Bullet
 from enemy import EnemyShip
+from enemy_bullet import EnemyBullet
+
+
+def change_direction(game_setting, enemies):
+    for enemy in enemies:
+        if enemy.check_edge():
+            game_setting.enemy_direction *= -1
+
+
+def enemy_fire(screen, game_setting, enemies, enemies_bullets):
+    if len(enemies_bullets) < game_setting.enemy_bullet_allowed:
+        enemy_list = list(enemies)
+        shuffle(enemy_list)
+        for enemy in enemy_list:
+            new_bullet = EnemyBullet(screen, game_setting, enemy)
+            enemies_bullets.add(new_bullet)
+            if len(enemies_bullets) == game_setting.enemy_bullet_allowed:
+                break
 
 
 def create_enemies(screen, game_setting, enemies):
@@ -98,7 +117,7 @@ def check_events(screen, game_setting, ship, bullets):
             keydown_events(screen, game_setting, event, ship, bullets)
             mousedown_events(screen, game_setting, event, ship, bullets)
 
-def update_screen(screen, background, game_setting, ship, enemies, bullets):
+def update_screen(screen, background, game_setting, ship, enemies, bullets, enemies_bullets):
     """
     Function which handles screen updates
     :param screen: just our pygame screen
@@ -109,9 +128,15 @@ def update_screen(screen, background, game_setting, ship, enemies, bullets):
     screen.blit(background, (0, 0))
     ship.blit()
     enemies.draw(screen)
-    for bullet in bullets:
-        bullet.blit()
+    change_direction(game_setting, enemies)
+    bullets.draw(screen)
     for bullet in bullets.copy():
         if bullet.rect.bottom <= 0:
             bullets.remove(bullet)
+    enemy_fire(screen, game_setting, enemies, enemies_bullets)
+    enemies_bullets.draw(screen)
+    for enemy_bullet in enemies_bullets.copy():
+        if enemy_bullet.rect.top >= game_setting.screen_height:
+            enemy_bullet.enemy.bullet_fired = False
+            enemies_bullets.remove(enemy_bullet)
     pygame.display.flip()

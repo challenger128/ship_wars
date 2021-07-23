@@ -14,6 +14,15 @@ class EnemyShip(Sprite):
         self.screen_rect = self.screen.get_rect()
         self.rect.centerx = self.rect.width
         self.rect.y = self.rect.height
+        self.bullet_fired = False
+        self.speed = game_setting.enemy_speed
+
+
+    def check_edge(self):
+        return self.rect.right >= self.screen_rect.right or self.rect.left <=0
+
+    def update(self):
+        self.rect.centerx += self.game_setting.enemy_direction * self.speed
 
     def blit(self):
         self.screen.blit(self.image, self.rect)
