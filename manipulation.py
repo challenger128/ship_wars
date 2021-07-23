@@ -1,6 +1,17 @@
 import sys
 import pygame
 from bullet import Bullet
+from enemy import EnemyShip
+
+
+def create_enemies(screen, game_setting, enemies):
+    enemy = EnemyShip(screen, game_setting)
+    space = game_setting.screen_width - enemy.rect.width
+    number_enemies = space // (2 * enemy.rect.width)
+    for number in range(number_enemies):
+        enemy = EnemyShip(screen, game_setting)
+        enemy.rect.x = enemy.rect.width + 2 * number * enemy.rect.width
+        enemies.add(enemy)
 
 
 def create_ship_bullet(screen, game_setting, ship, bullets):
@@ -87,18 +98,17 @@ def check_events(screen, game_setting, ship, bullets):
             keydown_events(screen, game_setting, event, ship, bullets)
             mousedown_events(screen, game_setting, event, ship, bullets)
 
-
-def update_screen(screen, background, game_setting, ship, bullets):
+def update_screen(screen, background, game_setting, ship, enemies, bullets):
     """
     Function which handles screen updates
     :param screen: just our pygame screen
-    :param game_setting: contains important attributes
     :param ship: our object which will be drawn
     :param bullets: our group of bullet which we will draw
     :return: None
     """
     screen.blit(background, (0, 0))
     ship.blit()
+    enemies.draw(screen)
     for bullet in bullets:
         bullet.blit()
     for bullet in bullets.copy():
