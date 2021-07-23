@@ -14,8 +14,8 @@ class Bullet(Sprite):
         """
         super(Bullet, self).__init__()
         self.screen = screen
-        self.rect = pygame.Rect(0, 0, game_setting.bullet_width,
-                                game_setting.bullet_height)
+        self.image = pygame.image.load('ship_wars/assets/bullet.png')
+        self.rect = self.image.get_rect()
         self.rect.centerx = ship.rect.centerx
         self.rect.top = ship.rect.top
         self.color = game_setting.bullet_color
@@ -28,9 +28,9 @@ class Bullet(Sprite):
         """
         self.rect.y -= self.speed
 
-    def draw(self):
+    def blit(self):
         """
         Draws simple rectangle which is the bullet
         :return: None
         """
-        pygame.draw.rect(self.screen, self.color, self.rect)
+        self.screen.blit(self.image, self.rect)

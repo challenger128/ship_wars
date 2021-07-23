@@ -14,12 +14,13 @@ pygame.display.set_caption(game_setting.name)
 clock = pygame.time.Clock()
 ship = Ship(screen, game_setting)
 bullets = Group()
-current_fps = Text(screen, game_setting, '')
+bullets_have = Text(screen, game_setting, '')
+
 
 while True:
     clock.tick(game_setting.fps)
     check_events(screen, game_setting, ship, bullets)
     ship.update()
     bullets.update()
-    current_fps.update('fps ' + str(int(clock.get_fps())))
-    update_screen(screen, game_setting, ship, bullets, current_fps)
+    bullets_have.update('Bullets ' + str(game_setting.bullet_allowed - len(bullets)))
+    update_screen(screen, game_setting, ship, bullets, bullets_have)
