@@ -12,6 +12,13 @@ def update_bullets(enemies, bullets, game_setting):
                                             - len(collisions), 2)
 
 
+def update_enemy_bullets(ship, enemy_bullets):
+    if pygame.sprite.spritecollideany(ship, enemy_bullets):
+        pygame.quit()
+        sys.exit()
+
+
+
 def change_direction(game_setting, enemies):
     for enemy in enemies:
         if enemy.check_edge():
@@ -147,6 +154,7 @@ def update_screen(screen, background, game_setting, ship, enemies, bullets, enem
             bullets.remove(bullet)
     enemy_fire(screen, game_setting, enemies, enemies_bullets)
     enemies_bullets.draw(screen)
+    update_enemy_bullets(ship, enemies_bullets)
     for enemy_bullet in enemies_bullets.copy():
         if enemy_bullet.rect.top >= game_setting.screen_height:
             enemy_bullet.enemy.bullet_fired = False
