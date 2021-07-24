@@ -6,6 +6,12 @@ from enemy import EnemyShip
 from enemy_bullet import EnemyBullet
 
 
+def update_bullets(enemies, bullets, game_setting):
+    collisions = pygame.sprite.groupcollide(bullets, enemies, True, True)
+    game_setting.enemy_bullet_allowed = max(game_setting.enemy_bullet_allowed
+                                            - len(collisions), 2)
+
+
 def change_direction(game_setting, enemies):
     for enemy in enemies:
         if enemy.check_edge():
@@ -135,6 +141,7 @@ def update_screen(screen, background, game_setting, ship, enemies, bullets, enem
     enemies.draw(screen)
     change_direction(game_setting, enemies)
     bullets.draw(screen)
+    update_bullets(enemies, bullets, game_setting)
     for bullet in bullets.copy():
         if bullet.rect.bottom <= 0:
             bullets.remove(bullet)
