@@ -2,6 +2,7 @@ import pygame
 from pygame.sprite import Group
 from settings import Setting
 from ship import Ship
+from stats import GameStats
 from manipulation import check_events, update_screen, create_enemies
 
 pygame.init()
@@ -16,6 +17,7 @@ bullets = Group()
 enemies = Group()
 enemies_bullets = Group()
 create_enemies(screen, game_setting, enemies)
+stats = GameStats(game_setting)
 
 while True:
     clock.tick(game_setting.fps)
@@ -24,4 +26,4 @@ while True:
     bullets.update()
     enemies.update()
     enemies_bullets.update()
-    update_screen(screen, background, game_setting, ship, enemies, bullets, enemies_bullets)
+    update_screen(screen, background, stats, game_setting, ship, enemies, bullets, enemies_bullets)

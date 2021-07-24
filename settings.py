@@ -10,10 +10,11 @@ class Setting:
         self.screen_height = 720
         self.fps = 120
         self.name = 'Ship Wars. Prototype'
-        self.ship_speed = 5
+        self.ship_speed = 3
+        self.ship_health = 3
         self.bullet_speed = 3
         self.bullet_allowed = 5
         self.enemy_speed = 1
-        self.enemy_bullet_speed = 3
-        self.enemy_bullet_allowed = 10
+        self.enemy_bullet_speed = 4
+        self.enemy_bullet_allowed = 13
         self.enemy_direction = 1
