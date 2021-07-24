@@ -117,12 +117,17 @@ def check_events(screen, game_setting, ship, bullets):
             keydown_events(screen, game_setting, event, ship, bullets)
             mousedown_events(screen, game_setting, event, ship, bullets)
 
+
 def update_screen(screen, background, game_setting, ship, enemies, bullets, enemies_bullets):
     """
     Function which handles screen updates
     :param screen: just our pygame screen
-    :param ship: our object which will be drawn
-    :param bullets: our group of bullet which we will draw
+    :param background: background picture
+    :param game_setting: class with presets
+    :param enemies: group of EnemyShip
+    :param ship: Ship object which will be drawn
+    :param bullets: group of Bullet which we will draw
+    :param enemies_bullets: group of EnemyBullet
     :return: None
     """
     screen.blit(background, (0, 0))
